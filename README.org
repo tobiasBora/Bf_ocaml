@@ -1,6 +1,8 @@
 * Bf_ocaml
 This is my Brainfuck interpreter coded in Ocaml. I added several very usefull debug functions, and the code is aimed to be very flexible.
-
+** Compilation
+To compile it you just need to run
+: make
 ** How to use it
 You can write your brainfuck code in a file (here file.bf) and just run
 : bf_ocaml file.bf
