@@ -1,0 +1,56 @@
+* Bf_ocaml
+This is my Brainfuck interpreter coded in Ocaml. I added several very usefull debug functions, and the code is aimed to be very flexible.
+
+** How to use it
+You can write your brainfuck code in a file (here file.bf) and just run
+: bf_ocaml file.bf
+
+If you just want to test a small code you can just put it in parameter :
+: bf_ocaml "<my brainfuck code>"
+
+You can change some options, such as the length of the array used, the method of using the '.' command (by default it reads character by character, you can read line by line too). To see all of them run
+: bf_ocaml -h
+
+One of the power of this tool is the debug mode. To use the debug mode just add the option '-d' :
+: bf_ocaml -d file.bf
+
+You can use, in addition of the classic operators +,-,<,>,[,],. and , the following debug code in your brainfuck code (all of them begin with a '#' followed by a letter) :
+- #s : make a pause of one second
+- #p : print the current cell in decimal
+- #f : print the full array in decimal
+- #e : print a new line
+
+Here is an example :
+file.bf :
+#+BEGIN_SRC brainfuck
++[>,#e.#f]
+#+END_SRC
+Then run :
+: bf_ocaml -d file.bf
+and write some text, you will get something like
+#+BEGIN_SRC text
+H
+H
+ | 1 | *72 | 0 |
+e
+e
+ | 1 | 72 | *101 | 0 |
+l
+l
+ | 1 | 72 | 101 | *108 | 0 |
+l
+l
+ | 1 | 72 | 101 | 108 | *108 | 0 |
+o
+o
+ | 1 | 72 | 101 | 108 | 108 | *111 | 0 |
+#+END_SRC
+(The '*' is the position of the cursor)
+
+To stop the execution during an infinite loop (as above) just hit Ctrl+C.
+
+** Licence
+This code is released under GPLv3 Licence.
+
+** Contact
+If you have any trouble with this program or some questions, please contact me at tobias.bora -@- gmail -.- com.
