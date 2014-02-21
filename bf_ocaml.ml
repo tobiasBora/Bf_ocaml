@@ -7,10 +7,10 @@
 (* Fixed int = Fixed size of <int> cells *)
 type c_type = Int of int
 type a_type = Fixed_Int of int array
-(* r_mode is used to know if we read line by line or not the user input *)
+(* r_mode is used to know if we read line by line or character by character during the user input *)
 type r_mode = CharByChar | LineByLine
     
-(* It will encode the board array, max_pos is the max already visited cell *)
+(* It will encode the board array, max_pos is the max already visited cell position *)
 type board = {
   a:a_type;
   mutable pos:int;
@@ -74,7 +74,8 @@ let get1char () =
   let res = input_char stdin in
   Unix.tcsetattr Unix.stdin Unix.TCSADRAIN termio;
   res
-
+    
+(* A list is created with all letters which hasn't been still read *)
 let list_of_string str =
   let rec list_of_string_aux str i =
       if i >= String.length str then []
@@ -172,7 +173,7 @@ let exec_full_code b code =
   done
 
 let _ =
-  (* On récupère les arguments *)
+  (* Default values *)
   let message = "Welcome in Bf-Ocaml, a great Ocaml interpreter for Brainfuck !\n\
  Usage :\n\
  bf_ocaml filename.bf\n\
@@ -184,7 +185,8 @@ let _ =
   and file = ref ""
   and debug_mode = ref false
   in
-  
+
+  (* We get the arguments *)
   let tmp_arg = ref [] in
   let args =
     [
@@ -223,6 +225,7 @@ let _ =
   end
   else
     code := !file;
+  (* Create the board *)
   let b = {
       a = array;
       pos = 0;
