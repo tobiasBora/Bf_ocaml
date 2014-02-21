@@ -1,6 +1,7 @@
 (* This is an interpreter for Brainfuck in Ocaml *)
+(* Created by Tobias Bora *)
+(* Licence GPLv3 *)
 
-(* Default values *)
 
 (* Array Type *)
 (* Fixed int = Fixed size of <int> cells *)
